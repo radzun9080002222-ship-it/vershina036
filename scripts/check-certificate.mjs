@@ -44,8 +44,12 @@ for (const [i, [, href]] of buttons.entries()) {
   const event = { target: { closest: (selector) => selector.startsWith("a[") ? link : null } };
   calls.length = 0;
   handlers.forEach(cb => cb(event));
-  const goals = calls.map(call => call.slice(1));
-  assert.deepEqual(goals, [["reachGoal", "cert_order"], ["reachGoal", channels[i]]]);
+  assert.deepEqual(calls, [
+    [112470058, "reachGoal", "cert_order"],
+    [114629983, "reachGoal", "cert_order"],
+    [112470058, "reachGoal", channels[i]],
+    [114629983, "reachGoal", channels[i]],
+  ]);
 }
 context.location.pathname = "/";
 calls.length = 0;
