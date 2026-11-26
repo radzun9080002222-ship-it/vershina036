@@ -54,5 +54,8 @@ for (const [i, [, href]] of buttons.entries()) {
 context.location.pathname = "/";
 calls.length = 0;
 handlers.forEach(cb => cb({ target: { closest: (selector) => selector.startsWith("a[") ? { hasAttribute: () => true, getAttribute: () => "tel:+7" } : null } }));
-assert.ok(!calls.some(call => call[2] === "cert_order"));
+assert.deepEqual(calls, [
+  [112470058, "reachGoal", "click_phone"],
+  [114629983, "reachGoal", "click_phone"],
+]);
 console.log("Certificate: static HTML, SEO, phone CTAs, contact pill and cert_order + channel goals passed");
